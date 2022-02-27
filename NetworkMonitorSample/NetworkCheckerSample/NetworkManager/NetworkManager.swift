@@ -12,7 +12,7 @@ extension Notification.Name {
     static let networkStatusChanged = Notification.Name("networkStatusChanged")
 }
 
-final class NetworkManager: NetworkConnectivityProtocol {
+final class NetworkManager: NetworkConnectivityProtocol, NetworkMonitoringProtocol {
     
     static let shared: NetworkManager = .init()
     
@@ -89,7 +89,7 @@ final class NetworkManager: NetworkConnectivityProtocol {
             case .wifi:
                 self?.connectionType = .wifi
             case .loopback, .other, .wiredEthernet:
-                self?._connectionType = .other
+                self?.connectionType = .other
             @unknown default:
                 self?.connectionType = .none
             }

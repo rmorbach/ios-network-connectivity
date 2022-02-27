@@ -10,9 +10,11 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    private var networkMonitoring: NetworkMonitoringProtocol? = NetworkManager.shared
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        NetworkManager.shared.startMonitoring()
+        networkMonitoring?.startMonitoring()
         return true
     }
 

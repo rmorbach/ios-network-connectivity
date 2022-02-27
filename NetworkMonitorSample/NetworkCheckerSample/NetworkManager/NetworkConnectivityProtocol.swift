@@ -15,3 +15,8 @@ protocol NetworkConnectivityProtocol {
     var isConnected: Bool { get }
     var connectionType: ConnectionType { get }
 }
+
+protocol NetworkMonitoringProtocol {
+    func startMonitoring()
+    func stopMonitoring()
+}

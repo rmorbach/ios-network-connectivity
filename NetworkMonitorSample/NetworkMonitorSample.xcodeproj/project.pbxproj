@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,8 @@
 		5E5DB55D27C989B400125886 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E5DB55B27C989B400125886 /* LaunchScreen.storyboard */; };
 		5E5DB56927C98CCC00125886 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5DB56827C98CCC00125886 /* ContentView.swift */; };
 		5E5DB57627C98FD100125886 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5DB57527C98FD100125886 /* NetworkManager.swift */; };
+		5EA82D4C27CBC030006C3250 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 5EA82D4B27CBC030006C3250 /* Reachability */; };
+		5EA82D4F27CBC03E006C3250 /* ReachabilityNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA82D4E27CBC03E006C3250 /* ReachabilityNetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,7 @@
 		5E5DB55E27C989B400125886 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E5DB56827C98CCC00125886 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5E5DB57527C98FD100125886 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		5EA82D4E27CBC03E006C3250 /* ReachabilityNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityNetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EA82D4C27CBC030006C3250 /* Reachability in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +85,7 @@
 			children = (
 				5E5DB57527C98FD100125886 /* NetworkManager.swift */,
 				5E37D7FA27CB9C71003C361A /* NetworkConnectivityProtocol.swift */,
+				5EA82D4E27CBC03E006C3250 /* ReachabilityNetworkManager.swift */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
@@ -113,6 +118,9 @@
 			dependencies = (
 			);
 			name = NetworkMonitorSample;
+			packageProductDependencies = (
+				5EA82D4B27CBC030006C3250 /* Reachability */,
+			);
 			productName = NetworkCheckerSample;
 			productReference = 5E5DB54D27C989AB00125886 /* NetworkMonitorSample.app */;
 			productType = "com.apple.product-type.application";
@@ -140,6 +148,9 @@
 				Base,
 			);
 			mainGroup = 5E5DB54427C989AB00125886;
+			packageReferences = (
+				5EA82D4A27CBC030006C3250 /* XCRemoteSwiftPackageReference "Reachability" */,
+			);
 			productRefGroup = 5E5DB54E27C989AB00125886 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -168,6 +179,7 @@
 			files = (
 				5E5DB55527C989AB00125886 /* ViewController.swift in Sources */,
 				5E37D7FB27CB9C71003C361A /* NetworkConnectivityProtocol.swift in Sources */,
+				5EA82D4F27CBC03E006C3250 /* ReachabilityNetworkManager.swift in Sources */,
 				5E5DB55127C989AB00125886 /* AppDelegate.swift in Sources */,
 				5E5DB57627C98FD100125886 /* NetworkManager.swift in Sources */,
 				5E5DB56927C98CCC00125886 /* ContentView.swift in Sources */,
@@ -367,6 +379,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5EA82D4A27CBC030006C3250 /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5EA82D4B27CBC030006C3250 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EA82D4A27CBC030006C3250 /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5E5DB54527C989AB00125886 /* Project object */;
 }
