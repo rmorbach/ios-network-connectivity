@@ -13,10 +13,12 @@
 		5E5DB55527C989AB00125886 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5DB55427C989AB00125886 /* ViewController.swift */; };
 		5E5DB55A27C989B400125886 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E5DB55927C989B400125886 /* Assets.xcassets */; };
 		5E5DB55D27C989B400125886 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E5DB55B27C989B400125886 /* LaunchScreen.storyboard */; };
-		5E5DB56927C98CCC00125886 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5DB56827C98CCC00125886 /* ContentView.swift */; };
+		5E5DB56927C98CCC00125886 /* NetworkInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5DB56827C98CCC00125886 /* NetworkInfoView.swift */; };
 		5E5DB57627C98FD100125886 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5DB57527C98FD100125886 /* NetworkManager.swift */; };
 		5EA82D4C27CBC030006C3250 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 5EA82D4B27CBC030006C3250 /* Reachability */; };
 		5EA82D4F27CBC03E006C3250 /* ReachabilityNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA82D4E27CBC03E006C3250 /* ReachabilityNetworkManager.swift */; };
+		5EA82D5327CBD955006C3250 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA82D5227CBD955006C3250 /* ContentView.swift */; };
+		5EA82D5727CBDA5E006C3250 /* NetworkInfoTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA82D5627CBDA5E006C3250 /* NetworkInfoTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,9 +30,11 @@
 		5E5DB55927C989B400125886 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E5DB55C27C989B400125886 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E5DB55E27C989B400125886 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5E5DB56827C98CCC00125886 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5E5DB56827C98CCC00125886 /* NetworkInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInfoView.swift; sourceTree = "<group>"; };
 		5E5DB57527C98FD100125886 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5EA82D4E27CBC03E006C3250 /* ReachabilityNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityNetworkManager.swift; sourceTree = "<group>"; };
+		5EA82D5227CBD955006C3250 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5EA82D5627CBDA5E006C3250 /* NetworkInfoTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInfoTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 		5E5DB54F27C989AB00125886 /* NetworkCheckerSample */ = {
 			isa = PBXGroup;
 			children = (
+				5EA82D5527CBDA53006C3250 /* Model */,
 				5E5DB56D27C98CF100125886 /* SupportingFiles */,
 				5E5DB56C27C98CEA00125886 /* NetworkManager */,
 				5E5DB56727C98CC200125886 /* View */,
@@ -74,8 +79,9 @@
 		5E5DB56727C98CC200125886 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5E5DB56827C98CCC00125886 /* ContentView.swift */,
+				5E5DB56827C98CCC00125886 /* NetworkInfoView.swift */,
 				5E5DB55427C989AB00125886 /* ViewController.swift */,
+				5EA82D5227CBD955006C3250 /* ContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -100,6 +106,14 @@
 				5E5DB55E27C989B400125886 /* Info.plist */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		5EA82D5527CBDA53006C3250 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5EA82D5627CBDA5E006C3250 /* NetworkInfoTO.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,10 +193,12 @@
 			files = (
 				5E5DB55527C989AB00125886 /* ViewController.swift in Sources */,
 				5E37D7FB27CB9C71003C361A /* NetworkConnectivityProtocol.swift in Sources */,
+				5EA82D5327CBD955006C3250 /* ContentView.swift in Sources */,
 				5EA82D4F27CBC03E006C3250 /* ReachabilityNetworkManager.swift in Sources */,
 				5E5DB55127C989AB00125886 /* AppDelegate.swift in Sources */,
 				5E5DB57627C98FD100125886 /* NetworkManager.swift in Sources */,
-				5E5DB56927C98CCC00125886 /* ContentView.swift in Sources */,
+				5E5DB56927C98CCC00125886 /* NetworkInfoView.swift in Sources */,
+				5EA82D5727CBDA5E006C3250 /* NetworkInfoTO.swift in Sources */,
 				5E5DB55327C989AB00125886 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

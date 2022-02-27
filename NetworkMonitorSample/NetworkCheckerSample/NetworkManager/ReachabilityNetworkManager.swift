@@ -29,7 +29,7 @@ final class ReachabilityNetworkManager: NetworkConnectivityProtocol, NetworkMoni
             _connectionType = newValue
         }
     }
-        
+    
     static let shared = ReachabilityNetworkManager()
     
     private let reachability: Reachability?
@@ -64,13 +64,16 @@ final class ReachabilityNetworkManager: NetworkConnectivityProtocol, NetworkMoni
     private var monitoringStarted = false
     
     private func notifyChanges() {
-        NotificationCenter.default.post(Notification(name: .networkStatusChanged))
+        let notification = Notification(name: .networkStatusChanged,
+                                        object: self,
+                                        userInfo: ["notifier": NetworkChangeNotifier.reachability])
+        NotificationCenter.default.post(notification)
     }
-                
+    
     func startMonitoring() {
         
         guard monitoringStarted == false else { return }
-                
+        
         let result = Result {
             try reachability?.startNotifier()
         }

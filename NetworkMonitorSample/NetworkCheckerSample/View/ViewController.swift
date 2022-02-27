@@ -9,12 +9,10 @@ import UIKit
 import Network
 
 final class ViewController: UIViewController {
-
-    private let networkConnectivity: NetworkConnectivityProtocol
-    
-    init(with networkConnectivity: NetworkConnectivityProtocol) {
-        self.networkConnectivity = networkConnectivity
+        
+    init() {
         super.init(nibName: nil, bundle: nil)
+        addObservers()
     }
     
     required init?(coder: NSCoder) {
@@ -22,13 +20,11 @@ final class ViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()            
-        addObservers()
+        super.viewDidLoad()        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateConnectionUI()
     }
         
     override func loadView() {
@@ -40,15 +36,27 @@ final class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(networkChanged(sender:)), name: .networkStatusChanged, object: nil)
     }
     
-    @objc private func networkChanged(sender: Any?) {
+    @objc private func networkChanged(sender: Notification) {
         DispatchQueue.main.async {
-            self.updateConnectionUI()
+            let notifier = sender.userInfo?["notifier"] as? NetworkChangeNotifier ?? .network
+            
+            let object = sender.object as? NetworkConnectivityProtocol
+                        
+            self.updateConnectionUI(notifier: notifier, networkConnectivity: object)
         }
     }
     
-    private func updateConnectionUI() {
-        (view as? ContentView)?.updateIsConnected(networkConnectivity.isConnected)
-        (view as? ContentView)?.updateConnectionType(networkConnectivity.connectionType)
+    private func updateConnectionUI(notifier: NetworkChangeNotifier,
+                                    networkConnectivity: NetworkConnectivityProtocol?) {
+        guard let ntc = networkConnectivity else { return }
+        let info = NetworkInfoTO(isConnected: ntc.isConnected,
+                                 connectionType: ntc.connectionType)
+        switch notifier {
+        case .network:
+            (view as? ContentView)?.updateNetworkManagerInfo(info)
+        case .reachability:
+            (view as? ContentView)?.updateReachabilityNetworkInfo(info)
+        }
     }
 }
 

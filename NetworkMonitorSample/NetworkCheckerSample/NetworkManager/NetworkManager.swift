@@ -8,9 +8,6 @@
 import Network
 import Foundation
 
-extension Notification.Name {
-    static let networkStatusChanged = Notification.Name("networkStatusChanged")
-}
 
 final class NetworkManager: NetworkConnectivityProtocol, NetworkMonitoringProtocol {
     
@@ -99,7 +96,10 @@ final class NetworkManager: NetworkConnectivityProtocol, NetworkMonitoringProtoc
     }
     
     private func notifyChanges() {
-        NotificationCenter.default.post(Notification(name: .networkStatusChanged))
+        let notification = Notification(name: .networkStatusChanged,
+                                        object: self,
+                                        userInfo: ["notifier": NetworkChangeNotifier.network])
+        NotificationCenter.default.post(notification)
     }
     
     func stopMonitoring() {

@@ -1,125 +1,113 @@
 //
 //  ContentView.swift
-//  NetworkCheckerSample
+//  NetworkMonitorSample
 //
-//  Created by Rodrigo Morbach on 25/02/22.
+//  Created by Rodrigo Morbach on 27/02/22.
 //
 
 import UIKit
 
-protocol CodeView {
-    func setup()
-    func setupViews()
-    func setupConstraints()
-    func setupExtra()
-}
-
-extension CodeView {
-    func setup() {
-        setupViews()
-        setupConstraints()
-        setupExtra()
-    }
-}
-
-
 final class ContentView: UIView {
     
-    private lazy var uiConnectedSwitch: UISwitch = {
-        let view = UISwitch()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.isOn = false
-        view.isEnabled = false
-        return view
+    private lazy var uiNetworkManagerView: NetworkInfoView = {
+        makeView(type: NetworkInfoView.self)
     }()
     
-    private lazy var uiConnectedLabel: UILabel = {
-        let view = UILabel()
-        view.text = "Is Connected?"
-        view.textColor = .black
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private lazy var uiReachabilityNetworkView: NetworkInfoView = {
+        makeView(type: NetworkInfoView.self)
     }()
     
-    private lazy var uiConnectionTypeLabel: UILabel = {
-        let view = UILabel()
-        view.text = "Connection Type"
-        view.textColor = .black
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var uiConnectionTypeValueLabel: UILabel = {
-        let view = UILabel()
-        view.textColor = .black
-        view.text = "Undefined"
-        view.textAlignment = .right
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var uiConnectionStack: UIStackView = {
-        let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.axis = .horizontal
-        return view
-    }()
-    
-    private lazy var uiConnectionTypeStack: UIStackView = {
-        let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.axis = .horizontal
-        return view
-    }()
-    
-    private lazy var uiContainerStack: UIStackView = {
-        let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.spacing = 10
+    private lazy var uiStackView: UIStackView = {
+        let view = makeView(type: UIStackView.self)
         view.axis = .vertical
+        view.spacing = 40
         return view
+    }()
+    
+    private lazy var uiScrollView: UIScrollView = {
+        let scroll = makeView(type: UIScrollView.self)
+        return scroll
+    }()
+    
+    private lazy var uiContainerView: UIView = {
+        makeView(type: UIView.self)
+    }()
+    
+    private lazy var uiNetworkLabel: UILabel = {
+        let label = makeView(type: UILabel.self)
+        label.textColor = .blue
+        label.text = "Network Framework"
+        return label
+    }()
+    
+    private lazy var uiReachabilityLabel: UILabel = {
+        let label = makeView(type: UILabel.self)
+        label.textColor = .blue
+        label.text = "Reachability Framework"
+        return label
     }()
     
     init() {
         super.init(frame: .zero)
-        backgroundColor = .white
         setup()
     }
+    
     required init?(coder: NSCoder) {
         fatalError("Not implemented")
     }
     
-    func updateIsConnected(_ connected: Bool) {
-        uiConnectedSwitch.isOn = connected
+    func updateNetworkManagerInfo(_ info: NetworkInfoTO) {
+        uiNetworkManagerView.updateIsConnected(info.isConnected)
+        uiNetworkManagerView.updateConnectionType(info.connectionType)
     }
     
-    func updateConnectionType(_ connectionType: ConnectionType) {
-        self.uiConnectionTypeValueLabel.text = connectionType.rawValue.uppercased()
+    func updateReachabilityNetworkInfo(_ info: NetworkInfoTO) {
+        uiReachabilityNetworkView.updateIsConnected(info.isConnected)
+        uiReachabilityNetworkView.updateConnectionType(info.connectionType)
     }
+    
+    private func makeView<T: UIView>(type: T.Type) -> T {
+        let view = type.init()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }
+    
 }
 
 extension ContentView: CodeView {
     func setupViews() {
-        uiConnectionStack.addArrangedSubview(uiConnectedLabel)
-        uiConnectionStack.addArrangedSubview(uiConnectedSwitch)
-        
-        uiConnectionTypeStack.addArrangedSubview(uiConnectionTypeLabel)
-        uiConnectionTypeStack.addArrangedSubview(uiConnectionTypeValueLabel)
-        
-        uiContainerStack.addArrangedSubview(uiConnectionStack)
-        uiContainerStack.addArrangedSubview(uiConnectionTypeStack)
-        
-        addSubview(uiContainerStack)
+        uiStackView.addArrangedSubview(uiNetworkLabel)
+        uiStackView.addArrangedSubview(uiNetworkManagerView)
+        uiStackView.addArrangedSubview(uiReachabilityLabel)
+        uiStackView.addArrangedSubview(uiReachabilityNetworkView)
+        uiContainerView.addSubview(uiStackView)
+        uiScrollView.addSubview(uiContainerView)
+        addSubview(uiScrollView)
     }
-    
     func setupConstraints() {
-        uiContainerStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
-        uiContainerStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
-        uiContainerStack.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        uiStackView.topAnchor.constraint(equalTo: uiContainerView.topAnchor).isActive = true
+        uiStackView.trailingAnchor.constraint(equalTo: uiContainerView.trailingAnchor, constant: -16).isActive = true
+        uiStackView.bottomAnchor.constraint(equalTo: uiContainerView.bottomAnchor).isActive = true
+        uiStackView.leadingAnchor.constraint(equalTo: uiContainerView.leadingAnchor, constant: 16).isActive = true
+        
+        uiContainerView.topAnchor.constraint(equalTo: uiScrollView.topAnchor, constant: 60.0).isActive = true
+        uiContainerView.trailingAnchor.constraint(equalTo: uiScrollView.trailingAnchor).isActive = true
+        uiContainerView.bottomAnchor.constraint(equalTo: uiScrollView.bottomAnchor).isActive = true
+        uiContainerView.leadingAnchor.constraint(equalTo: uiScrollView.leadingAnchor).isActive = true
+        uiContainerView.widthAnchor.constraint(equalTo: uiScrollView.widthAnchor).isActive = true
+                
+        uiScrollView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        uiScrollView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        uiScrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        uiScrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        
+        let heightConstraint = uiContainerView.heightAnchor.constraint(equalTo: uiScrollView.heightAnchor, multiplier: 1.0)
+        heightConstraint.priority = .defaultLow
+        heightConstraint.isActive = true
+
     }
-    
     func setupExtra() {
         
     }
 }
-

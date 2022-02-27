@@ -11,6 +11,14 @@ enum ConnectionType: String {
     case cellular, wifi, none, other
 }
 
+extension Notification.Name {
+    static let networkStatusChanged = Notification.Name("networkStatusChanged")
+}
+
+enum NetworkChangeNotifier {
+    case network, reachability
+}
+
 protocol NetworkConnectivityProtocol {
     var isConnected: Bool { get }
     var connectionType: ConnectionType { get }
