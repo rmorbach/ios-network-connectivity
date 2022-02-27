@@ -22,15 +22,7 @@ final class ViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-//        let netw = NWPathMonitor()
-//        netw.pathUpdateHandler = { p in
-//            print(p.status)
-//        }
-//        
-//        netw.start(queue: .main)
-        
+        super.viewDidLoad()            
         addObservers()
     }
     
