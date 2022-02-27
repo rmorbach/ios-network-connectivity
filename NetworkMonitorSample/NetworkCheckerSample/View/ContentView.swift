@@ -36,6 +36,7 @@ final class ContentView: UIView {
     private lazy var uiConnectedLabel: UILabel = {
         let view = UILabel()
         view.text = "Is Connected?"
+        view.textColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -43,12 +44,14 @@ final class ContentView: UIView {
     private lazy var uiConnectionTypeLabel: UILabel = {
         let view = UILabel()
         view.text = "Connection Type"
+        view.textColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private lazy var uiConnectionTypeValueLabel: UILabel = {
         let view = UILabel()
+        view.textColor = .black
         view.text = "Undefined"
         view.textAlignment = .right
         view.translatesAutoresizingMaskIntoConstraints = false

@@ -70,17 +70,19 @@ final class NetworkManager: NetworkConnectivityProtocol {
     private func _startMonitoring() {
         hasStartedMonitoring = true
         monitor.pathUpdateHandler = { [weak self] path in
-            self?._isConnected = path.status != .unsatisfied            
+            print(path.status)
+            self?._isConnected = path.status != .unsatisfied
+            print("connected: \(self!.isConnected)")
             let currentConnection = path.availableInterfaces.first { interface -> Bool in
                 return path.usesInterfaceType(interface.type)
             }
             
             guard let type = currentConnection?.type else {
                 self?.connectionType = .none
+                self?.notifyChanges()
                 return
             }
-            
-            
+                        
             switch type {
             case .cellular:
                 self?.connectionType = .cellular
@@ -91,9 +93,13 @@ final class NetworkManager: NetworkConnectivityProtocol {
             @unknown default:
                 self?.connectionType = .none
             }
-            NotificationCenter.default.post(Notification(name: .networkStatusChanged))
+            self?.notifyChanges()
         }
         monitor.start(queue: monitorQueue)
+    }
+    
+    private func notifyChanges() {
+        NotificationCenter.default.post(Notification(name: .networkStatusChanged))
     }
     
     func stopMonitoring() {

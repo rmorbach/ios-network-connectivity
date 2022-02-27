@@ -11,8 +11,6 @@ enum ConnectionType: String {
     case cellular, wifi, none, other
 }
 
-
-
 protocol NetworkConnectivityProtocol {
     var isConnected: Bool { get }
     var connectionType: ConnectionType { get }
